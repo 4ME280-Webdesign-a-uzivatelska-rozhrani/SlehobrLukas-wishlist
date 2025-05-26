@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wishlist Lukáše 🎁</title>
+  <title>🎁 Wishlist</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     body {
@@ -34,15 +34,15 @@
 </head>
 <body>
   <div class="container">
-    <h1 class="text-center mb-4">🎁 Wishlist Lukáše</h1>
+    <h1 class="text-center mb-4">🎁 Wishlist</h1>
     <div id="wishlist"></div>
   </div>
 
   <script>
-    // TODO: nahraď níže BIN_ID a API_KEY svými hodnotami pro Lukáše
-    const BIN_ID = 'TADY_VLOŽ_BIN_ID_LUKÁŠE';
-    const API_KEY = 'TADY_VLOŽ_API_KEY_LUKÁŠE';
-    const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+    // TVÉ JSONBin přihlašovací údaje:
+    const BIN_ID  = '68341bdb8a456b7966a574fc';
+    const API_KEY = '$2a$10$psj9kL3ZmMLCr7Q1aFkAT.QIHn7OUezfvPaXcM1EqrKA/eMLeAX2m';
+    const BIN_URL    = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
     const BIN_LATEST = `${BIN_URL}/latest`;
 
     let data = [];
@@ -116,17 +116,16 @@
         body: JSON.stringify(newData)
       })
       .then(res => res.json())
-      .then(json => {
+      .then(() => {
         alert('✅ Uloženo!');
         renderWishlist(newData);
       })
       .catch(err => alert('❌ Chyba při ukládání: ' + err.message));
     }
 
+    // Načtení dat z JSONBin
     fetch(BIN_LATEST, {
-      headers: {
-        'X-Master-Key': API_KEY
-      }
+      headers: { 'X-Master-Key': API_KEY }
     })
     .then(res => res.json())
     .then(json => {
@@ -134,7 +133,8 @@
       renderWishlist(data);
     })
     .catch(err => {
-      document.getElementById('wishlist').textContent = '❌ Nepodařilo se načíst wishlist: ' + err.message;
+      document.getElementById('wishlist').textContent =
+        '❌ Nepodařilo se načíst wishlist: ' + err.message;
     });
   </script>
 </body>
